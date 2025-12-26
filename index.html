@@ -3,109 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qtairo Inc. Website</title>
-    
+    <title>Qtairo Inc. | Quantum AI Robotics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Base styles for the dark green theme */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg-deep: #0f1115;
+            --bg-card: #16191e;
+            --logo-teal: #39b5bc;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #004d40; /* Deep Teal/Dark Green */
-            color: #ffffff; /* White text */
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Container to center content */
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.2); /* Slight transparent overlay for depth */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        /* --- THE FEATHERED MASK STRATEGY --- */
+        /* This uses multiple opacity stops to ensure the square edges are 100% invisible */
+        .feathered-logo {
+            display: block;
+            width: 100%;
+            -webkit-mask-image: radial-gradient(circle at center, 
+                black 30%, 
+                rgba(0, 0, 0, 0.8) 50%, 
+                rgba(0, 0, 0, 0.3) 75%, 
+                rgba(0, 0, 0, 0.05) 90%, 
+                transparent 100%);
+            mask-image: radial-gradient(circle at center, 
+                black 61%, 
+                rgba(0, 0, 0, 0.8) 64%, 
+                rgba(0, 0, 0, 0.3) 67%, 
+                rgba(0, 0, 0, 0.05) 70%, 
+                transparent 100%);
+            transition: transform 0.4s ease;
         }
 
-        /* Header styling */
-        header {
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #388e3c; /* A slightly brighter green line */
+        /* Navigation Logo: Oversized to crop edges before masking */
+        .nav-logo-wrap {
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        header h1 {
-            color: #c8e6c9; /* Light green accent for the main title */
-            margin-bottom: 5px;
+        .nav-logo-wrap img {
+            height: 90px; 
+            -webkit-mask-image: radial-gradient(circle, black 25%, transparent 80%);
+            mask-image: radial-gradient(circle, black 25%, transparent 80%);
         }
 
-        /* Section styling */
-        section {
-            padding: 20px 0;
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background: rgba(15, 17, 21, 0.98);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        section h2 {
-            color: #c8e6c9;
-            border-left: 5px solid #388e3c;
-            padding-left: 10px;
-            margin-bottom: 15px;
-        }
-
-        /* Footer styling */
-        footer {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #388e3c;
-            font-size: 0.8em;
-            opacity: 0.8;
-        }
-
-        /* Link styling */
-        a {
-            color: #c8e6c9;
+        .nav-links a {
+            color: var(--text-dim);
             text-decoration: none;
+            margin-left: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 80px 8%;
+            min-height: 85vh;
         }
+
+        .hero-content { flex: 1.1; }
+        .hero-image { 
+            flex: 0.9; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Ambient Glow to blend the remaining pixels */
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(57, 181, 188, 0.12) 0%, transparent 75%);
+            z-index: 0;
+        }
+
+        .hero-logo-container {
+            width: 100%;
+            max-width: 460px;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .highlight { color: var(--logo-teal); font-weight: 800; }
+
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 8% 120px;
+        }
+
+        .pillar-card {
+            background: var(--bg-card);
+            padding: 45px;
+            border-radius: 4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            transition: 0.3s;
+        }
+
+        .pillar-card:hover { border-top-color: var(--logo-teal); background: #1a1e24; }
+
+        footer {
+            padding: 80px 8% 50px;
+            text-align: center;
+            background: #08090b;
+        }
+
+        .footer-logo-wrap {
+            width: 100px;
+            margin: 0 auto 20px;
+            opacity: 0.9;
+        }
+
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <header>
-            <h1>Qtairo Inc.</h1>
-            <p>We improve life with science and technology.</p>
-        </header>
 
-        <section id="about">
-            <h2>🌍 About Us</h2>
-            <p>We are dedicated to providing the best solutions. Established in 2025, our commitment is to quality, integrity, and customer satisfaction. Our unique approach focuses on niche.</p>
-        </section>
+    <nav>
+        <div class="nav-logo-wrap">
+            <img src="logo.png" alt="Qtairo">
+        </div>
+        <div class="nav-links">
+            <a href="#">RESEARCH</a>
+            <a href="#">LABS</a>
+            <a href="#">CONNECT</a>
+        </div>
+    </nav>
 
-        <section id="services">
-            <h2>💡 Our Services</h2>
-            <ul>
-                <li>Service Offering 1: Detailed description of what this service entails.</li>
-                <li>Service Offering 2: Benefits and outcomes for the client.</li>
-                <li>Service Offering 3: Pricing structure or unique features.</li>
-            </ul>
-        </section>
-
-        <section id="contact">
-            <h2>📞 Contact Us</h2>
-            <p>Ready to start a project? Get in touch with us!</p>
-            <p>
-                Email: <a href="mailto:">to be announced</a><br>
-                Phone: to be announced<br>
-                Address: Seoul, Korea
+    <section class="hero">
+        <div class="hero-content">
+            <h1 style="font-size: 4.2rem; line-height: 1; margin-bottom: 20px;">
+                Quantum-Led <br><span class="highlight">Intelligence.</span>
+            </h1>
+            <p style="font-size: 20px; color: var(--text-dim); max-width: 500px; margin-bottom: 45px; font-weight: 300;">
+                Building the computational foundation for autonomous kinetic systems and neural research.
             </p>
-        </section>
+            <a href="#" style="border: 2px solid var(--logo-teal); color: var(--logo-teal); padding: 16px 45px; text-decoration: none; font-weight: 800; font-size: 14px; letter-spacing: 2px; border-radius: 4px; display: inline-block;">INITIATE PROJECT</a>
+        </div>
+        <div class="hero-image">
+            <div class="hero-logo-container">
+                <img src="logo.png" alt="Qtairo Inc" class="feathered-logo">
+            </div>
+        </div>
+    </section>
 
-        <footer>
-            <p>&copy; Qtairo Inc. All rights reserved.</p>
-        </footer>
-    </div>
+    <section class="pillars">
+        <div class="pillar-card">
+            <h3 style="margin-bottom: 12px; letter-spacing: 1px;">QUANTUM</h3>
+            <p style="color: var(--text-dim);">Solving noise-to-logic ratios for industrial-grade quantum advantage.</p>
+        </div>
+        <div class="pillar-card">
+            <h3 style="margin-bottom: 12px; letter-spacing: 1px;">AI</h3>
+            <p style="color: var(--text-dim);">Proprietary neural architectures designed for high-frequency kinetic feedback.</p>
+        </div>
+        <div class="pillar-card">
+            <h3 style="margin-bottom: 12px; letter-spacing: 1px;">ROBOTICS</h3>
+            <p style="color: var(--text-dim);">Physical agents capable of autonomous decision making in unmapped environments.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo-wrap">
+            <img src="logo.png" alt="Qtairo" class="feathered-logo">
+        </div>
+        <p style="color: var(--text-dim); font-size: 11px; letter-spacing: 2px;">&copy; 2025 QTAIRO INC. | SEOUL, KOREA</p>
+    </footer>
+
 </body>
 </html>
