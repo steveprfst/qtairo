@@ -6,7 +6,8 @@
     <title>Qtairo Inc. | Quantum AI Robotics</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        /* Mixing original Plus Jakarta with JetBrains Mono for a technical feel */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
 
         :root {
             --bg-deep: #0f1115;
@@ -25,8 +26,16 @@
             overflow-x: hidden;
         }
 
-        /* --- THE FEATHERED MASK STRATEGY --- */
-        /* This uses multiple opacity stops to ensure the square edges are 100% invisible */
+        /* --- NEW: INTERACTIVE BACKGROUND --- */
+        #bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.35;
+        }
+
+        /* --- YOUR ORIGINAL GRADATION STRATEGY (UNCHANGED) --- */
         .feathered-logo {
             display: block;
             width: 100%;
@@ -45,7 +54,10 @@
             transition: transform 0.4s ease;
         }
 
-        /* Navigation Logo: Oversized to crop edges before masking */
+        /* NEW: Technical Monospace Accent */
+        .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; }
+
+        /* Navigation Logo: Original logic preserved */
         .nav-logo-wrap {
             height: 50px;
             width: 50px;
@@ -66,7 +78,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 8%;
-            background: rgba(15, 17, 21, 0.98);
+            background: rgba(15, 17, 21, 0.85);
             backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
@@ -100,7 +112,7 @@
             position: relative;
         }
 
-        /* Ambient Glow to blend the remaining pixels */
+        /* Original Ambient Glow logic preserved */
         .hero-image::before {
             content: '';
             position: absolute;
@@ -123,6 +135,24 @@
         }
 
         .highlight { color: var(--logo-teal); font-weight: 800; }
+
+        /* NEW: PULSING CTA BUTTON */
+        .cta-btn {
+            background: var(--logo-teal);
+            color: #000;
+            padding: 16px 45px;
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 4px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(57, 181, 188, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(57, 181, 188, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(57, 181, 188, 0); }
+        }
 
         .pillars {
             display: grid;
@@ -157,11 +187,13 @@
 </head>
 <body>
 
+    <canvas id="bg-canvas"></canvas>
+
     <nav>
         <div class="nav-logo-wrap">
             <img src="logo.png" alt="Qtairo">
         </div>
-        <div class="nav-links">
+        <div class="nav-links mono">
             <a href="#">RESEARCH</a>
             <a href="#">LABS</a>
             <a href="#">CONNECT</a>
@@ -170,13 +202,14 @@
 
     <section class="hero">
         <div class="hero-content">
+            <div class="mono" style="color: var(--logo-teal); margin-bottom: 20px;">R&D INFRASTRUCTURE</div>
             <h1 style="font-size: 4.2rem; line-height: 1; margin-bottom: 20px;">
                 Quantum-Led <br><span class="highlight">Intelligence.</span>
             </h1>
             <p style="font-size: 20px; color: var(--text-dim); max-width: 500px; margin-bottom: 45px; font-weight: 300;">
                 Building the computational foundation for autonomous kinetic systems and neural research.
             </p>
-            <a href="#" style="border: 2px solid var(--logo-teal); color: var(--logo-teal); padding: 16px 45px; text-decoration: none; font-weight: 800; font-size: 14px; letter-spacing: 2px; border-radius: 4px; display: inline-block;">INITIATE PROJECT</a>
+            <a href="#" class="cta-btn mono">Initiate Project</a>
         </div>
         <div class="hero-image">
             <div class="hero-logo-container">
@@ -187,15 +220,18 @@
 
     <section class="pillars">
         <div class="pillar-card">
-            <h3 style="margin-bottom: 12px; letter-spacing: 1px;">QUANTUM</h3>
+            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Division 01</div>
+            <h3 style="letter-spacing: 1px;">QUANTUM</h3>
             <p style="color: var(--text-dim);">Solving noise-to-logic ratios for industrial-grade quantum advantage.</p>
         </div>
         <div class="pillar-card">
-            <h3 style="margin-bottom: 12px; letter-spacing: 1px;">AI</h3>
+            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Division 02</div>
+            <h3 style="letter-spacing: 1px;">AI</h3>
             <p style="color: var(--text-dim);">Proprietary neural architectures designed for high-frequency kinetic feedback.</p>
         </div>
         <div class="pillar-card">
-            <h3 style="margin-bottom: 12px; letter-spacing: 1px;">ROBOTICS</h3>
+            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Division 03</div>
+            <h3 style="letter-spacing: 1px;">ROBOTICS</h3>
             <p style="color: var(--text-dim);">Physical agents capable of autonomous decision making in unmapped environments.</p>
         </div>
     </section>
@@ -204,8 +240,45 @@
         <div class="footer-logo-wrap">
             <img src="logo.png" alt="Qtairo" class="feathered-logo">
         </div>
-        <p style="color: var(--text-dim); font-size: 11px; letter-spacing: 2px;">&copy; 2025 QTAIRO INC. | SEOUL, KOREA</p>
+        <p class="mono" style="color: var(--text-dim); font-size: 11px;">&copy; 2025 QTAIRO INC. | SEOUL R&D LABS</p>
     </footer>
 
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for(let i=0; i<70; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 1.5,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#39b5bc';
+            particles.forEach(p => {
+                p.x += p.vx; p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init(); animate();
+    </script>
 </body>
 </html>
