@@ -1,5 +1,7 @@
-
 <!DOCTYPE html>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -34,25 +36,24 @@
             opacity: 0.35;
         }
 
-        /* --- ORIGINAL GRADATION STRATEGY --- */
         .feathered-logo {
             display: block;
             width: 100%;
-            -webkit-mask-image: radial-gradient(circle at center, black 30%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.3) 75%, rgba(0, 0, 0, 0.05) 90%, transparent 100%);
             mask-image: radial-gradient(circle at center, black 61%, rgba(0, 0, 0, 0.8) 64%, rgba(0, 0, 0, 0.3) 67%, rgba(0, 0, 0, 0.05) 70%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 61%, rgba(0, 0, 0, 0.8) 64%, rgba(0, 0, 0, 0.3) 67%, rgba(0, 0, 0, 0.05) 70%, transparent 100%);
         }
 
         .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; }
 
         /* Navigation */
         .nav-logo-wrap {
-            height: 50px; width: 50px;
+            height: 70px; width: 70px;
             display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
         .nav-logo-wrap img {
-            height: 90px; 
-            -webkit-mask-image: radial-gradient(circle, black 25%, transparent 80%);
+            height: 70px; 
             mask-image: radial-gradient(circle, black 25%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle, black 25%, transparent 80%);
         }
 
         nav {
@@ -125,12 +126,12 @@
 
     <nav>
         <div class="nav-logo-wrap">
-            <img src="logo.png" alt="Qtairo">
+            <a href="index.html"><img src="logo.png" alt="Qtairo"></a>
         </div>
         <div class="nav-links mono">
-            <a href="#">RESEARCH</a>
-            <a href="#">LABS</a>
-            <a href="#">CONNECT</a>
+           <a href="#research">RESEARCH</a>
+           <a href="javascript:void(0)" class="clickable-name" onclick="showBio('connect.html')">CONNECT</a>
+          
         </div>
     </nav>
 
@@ -143,15 +144,18 @@
             <p style="font-size: 20px; color: var(--text-dim); max-width: 500px; margin-bottom: 45px; font-weight: 300;">
                 Building the computational foundation for autonomous kinetic systems and neural research.
             </p>
-            <a href="#" class="cta-btn mono">Initiate Project</a>
+            <a href="javascript:void(0)" class="cta-btn mono" onclick="showBio('connect.html')" id="research">Initiate Project</a>
+
+            
         </div>
         <div class="hero-image">
             <div class="hero-logo-container">
                 <img src="logo.png" alt="Qtairo Inc" class="feathered-logo">
             </div>
         </div>
+        <p id="research"></p>
     </section>
-
+    
     <section class="pillars">
         <div class="pillar-card">
             <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Division 01</div>
@@ -170,6 +174,8 @@
         </div>
     </section>
 
+
+    
     <section class="info-sections">
         <div class="info-card">
             <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Milestones</div>
@@ -183,8 +189,8 @@
             <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Leadership</div>
             <h3 class="mono">People</h3>
             <ul class="info-list">
-                <li><span class="clickable-name" onclick="showBio('ceo')">Changsoo Je, PhD</span> / Chief Executive Officer</li>
-                <li><span class="clickable-name" onclick="showBio('director')">Woojeong Jeon</span> / Director</li>
+                <li><span class="clickable-name" onclick="showBio('cje.html')">Changsoo Je, PhD</span> / Chief Executive Officer</li>
+                <li><span class="clickable-name" onclick="showBio('wjj.html')">Woojeong Jeon</span> / Director</li>
             </ul>
         </div>
     </section>
@@ -192,39 +198,86 @@
     <div id="bioModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
-            <div class="mono" id="bioTitle" style="color: var(--logo-teal); margin-bottom: 10px;"></div>
-            <h2 id="bioName" style="margin-bottom: 20px;"></h2>
-            <div id="bioText" style="color: var(--text-dim); line-height: 1.8;"></div>
+            <div id="bioContainer">
+                </div>
         </div>
     </div>
 
+
+
+
+
+
+
     <footer>
-        <div class="footer-logo-wrap">
-            <img src="logo.png" alt="Qtairo" class="feathered-logo">
+
+        <div style="text-align: left;">
+            
+            <ul class="info-list" style="line-height: 1.2;">
+            <li>
+            <span>Business Registration Number</span>
+            <div style="color: var(--text-dim); font-size: 13px; margin-top: 2px;">347-87-03789</div>
+            </li>
+            </ul>
+
+
+            <ul class="info-list" style="line-height: 1.2;">
+            <li>
+            <span>Address</span>
+            <div style="color: var(--text-dim); font-size: 13px; margin-top: 2px;">Room 3098, Wooyang Bldg, 173, Mokdong-ro, Yangcheon-gu, Seoul, Republic of Korea</div>
+            </li>
+            </ul>
+
+            <ul class="info-list" style="line-height: 1.2;">
+            <li>
+            <span>E-mail</span>
+            <div style="color: var(--text-dim); font-size: 13px; margin-top: 2px;">qt@qtairo.com</div>
+            </li>
+            </ul>
+
+            
+            </div>
+
+    
+        <style>
+    .footer-line {
+        border: 0;
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.1); /* 0.1보다 더 얇고 은은한 느낌 */
+        margin: 40px 0;
+        width: 100%;
+    }
+</style>
+
+<div class="info">
+    </div>
+
+<hr class="footer-line"> <div class="footer-bottom">
+    </div>
+        
+     
+
+        <div class="footer-logo-wrap" style="margin-bottom: 4px;">
+        <img src="logo.png" alt="Qtairo" class="feathered-logo" style="display: block;">
         </div>
-        <p class="mono" style="color: var(--text-dim); font-size: 11px;">&copy; 2025 QTAIRO INC. | SEOUL R&D LABS</p>
+        <p style="color: var(--text-dim); margin-top: 0; font-size: inherit;">&copy;&nbsp;&nbsp;2025&ndash;2026&nbsp;&nbsp;&nbsp;Qtairo Inc.</p>
+        
     </footer>
 
-    <script>
-        // Updated Modest Bio Data
-        const bios = {
-            ceo: {
-                title: "Chief Executive Officer",
-                name: "Changsoo Je, PhD",
-                text: "Changsoo Je is the Chief Executive Officer of Qtairo Inc. He previously served as a Research Professor at Sogang University and held the roles of CTO, Executive Director, and Director of Research Center at Grand Power Solution Co., Ltd. (2024). He also served as CTO and Director of Research Center at e2on Inc. (2023-2024). He holds a Ph.D. in Media Technology from Sogang University, with a background in computer vision and 3D range imaging."
-            },
-            director: {
-                title: "Director",
-                name: "Woojeong Jeon",
-                text: "Woojeong Jeon is a Director at Qtairo Inc. Prior to this role, she worked as a Marketer at ADCONEX (2023.09 - 2025.10) and as a Project Manager at Edgerank (2021.01 - 2023.05). She currently manages project operations and accounts for the company."
-            }
-        };
 
-        function showBio(person) {
-            document.getElementById('bioTitle').innerText = bios[person].title;
-            document.getElementById('bioName').innerText = bios[person].name;
-            document.getElementById('bioText').innerText = bios[person].text;
-            document.getElementById('bioModal').style.display = "block";
+    <script>
+        async function showBio(fileName) {
+            const container = document.getElementById('bioContainer');
+            try {
+                const response = await fetch(fileName);
+                if (!response.ok) throw new Error('Bio file not found');
+                const html = await response.text();
+                container.innerHTML = html;
+                document.getElementById('bioModal').style.display = "block";
+            } catch (error) {
+                console.error("Error loading bio:", error);
+                container.innerHTML = "<p>Bio content unavailable.</p>";
+            }
         }
 
         function closeModal() {
@@ -244,10 +297,10 @@
         function init() {
             canvas.width = window.innerWidth; canvas.height = window.innerHeight;
             particles = [];
-            for(let i=0; i<70; i++) {
+            for(let i=0; i<85; i++) {
                 particles.push({
                     x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-                    size: Math.random() * 1.5, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4
+                    size: Math.random() * 3.0, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4
                 });
             }
         }
@@ -265,4 +318,71 @@
         init(); animate();
     </script>
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
