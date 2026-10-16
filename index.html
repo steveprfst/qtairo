@@ -12,7 +12,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
 
         :root {
-            --bg-deep: #0f1115;
+            --bg-deep: #21370B;
             --bg-card: #16191e;
             --logo-teal: #39b5bc;
             --text-main: #e2e8f0;
@@ -58,7 +58,7 @@
 
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 8%; background: rgba(15, 17, 21, 0.85);
+            padding: 15px 8%; background: rgba(33, 55, 11, 0.85);
             backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -68,27 +68,193 @@
             font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
         }
 
-        /* Hero */
-        .hero { display: flex; align-items: center; padding: 80px 8%; min-height: 85vh; }
-        .hero-content { flex: 1.1; }
-        .hero-image { flex: 0.9; display: flex; justify-content: center; align-items: center; position: relative; }
-        .hero-image::before {
-            content: ''; position: absolute; width: 380px; height: 380px;
-            background: radial-gradient(circle, rgba(57, 181, 188, 0.12) 0%, transparent 75%);
-        }
 
-        .hero-logo-container { width: 100%; max-width: 460px; z-index: 1; animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        .highlight { color: var(--logo-teal); font-weight: 800; }
+/* Hero - Desktop */
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 80px 8%;
+    min-height: 85vh;
+    box-sizing: border-box;
+}
 
-        .cta-btn {
-            background: var(--logo-teal); color: #000; padding: 16px 45px;
-            text-decoration: none; font-weight: 800; border-radius: 4px;
-            display: inline-block; animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(57, 181, 188, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(57, 181, 188, 0); } 100% { box-shadow: 0 0 0 0 rgba(57, 181, 188, 0); } }
+.hero-content {
+    flex: 1.1;
+    min-width: 0;
+}
 
+.hero-image {
+    flex: 0.9;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    isolation: isolate;
+}
+
+.hero-image::before {
+    content: '';
+    position: absolute;
+    width: min(100%, 460px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(57, 181, 188, 0.20) 0%,
+        rgba(57, 181, 188, 0.12) 40%,
+        rgba(57, 181, 188, 0.05) 58%,
+        transparent 75%
+    );
+    filter: blur(35px);
+    transform: scale(1.15);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.hero-logo-ring {
+    position: absolute;
+    width: min(90%, 420px);
+    aspect-ratio: 1 / 1;
+    border: 1px solid rgba(57, 181, 188, 0.4);
+    border-radius: 50%;
+    box-shadow:
+        0 0 18px rgba(57, 181, 188, 0.12),
+        inset 0 0 18px rgba(57, 181, 188, 0.06);
+    pointer-events: none;
+}
+
+.hero-logo-container {
+    display: block;
+    position: relative;
+    width: min(85%, 391px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    border-radius: 50%;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+    -webkit-mask-image: radial-gradient(
+        circle at center,
+        black 35%,
+        rgba(0, 0, 0, 0.9) 45%,
+        rgba(0, 0, 0, 0.6) 55%,
+        rgba(0, 0, 0, 0.25) 65%,
+        rgba(0, 0, 0, 0.08) 72%,
+        transparent 78%
+    );
+    mask-image: radial-gradient(
+        circle at center,
+        black 35%,
+        rgba(0, 0, 0, 0.9) 45%,
+        rgba(0, 0, 0, 0.6) 55%,
+        rgba(0, 0, 0, 0.25) 65%,
+        rgba(0, 0, 0, 0.08) 72%,
+        transparent 78%
+    );
+    filter:
+        drop-shadow(0 0 12px rgba(57, 181, 188, 0.25))
+        drop-shadow(0 0 24px rgba(57, 181, 188, 0.22));
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.highlight {
+    color: var(--logo-teal);
+    font-weight: 800;
+}
+
+
+
+/* Hero - Mobile */
+@media (max-width: 700px) {
+    .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        align-items: start;
+        padding: 35px 6%;
+        min-height: auto;
+        overflow: visible;
+    }
+
+    .hero-content {
+        display: contents;
+    }
+
+    .hero-content > .mono {
+        grid-column: 1;
+        grid-row: 1;
+        margin-bottom: 16px !important;
+        text-align: left;
+    }
+
+    .hero-content h1 {
+        grid-column: 1;
+        grid-row: 2;
+        width: 100%;
+        font-size: 36px !important;
+        line-height: 1.15 !important;
+        text-align: left;
+        overflow-wrap: normal;
+        word-break: normal;
+        margin-bottom: 18px !important;
+    }
+
+    .hero-content p {
+        grid-column: 1;
+        grid-row: 3;
+        width: 100%;
+        max-width: 100%;
+        font-size: 15px !important;
+        line-height: 1.7;
+        text-align: left;
+        margin-bottom: 24px !important;
+    }
+
+    .hero-image {
+        grid-column: 1;
+        grid-row: 4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        margin: 0 0 24px;
+    }
+
+    .hero-logo-container {
+        width: 220px;
+        max-width: 75%;
+        height: auto;
+    }
+
+    .hero-logo-ring {
+        width: 90%;
+    }
+
+    .hero-content .cta-btn {
+        grid-column: 1;
+        grid-row: 5;
+        justify-self: start;
+        align-self: start;
+        min-width: 180px;
+        min-height: 52px;
+        margin: 0;
+    }
+}
+
+
+        
         /* Information Cards */
         .pillars, .info-sections { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 8% 80px; }
         .pillar-card, .info-card { background: var(--bg-card); padding: 45px; border-radius: 4px; border-top: 1px solid rgba(255, 255, 255, 0.03); transition: 0.3s; }
@@ -102,26 +268,610 @@
         .clickable-name { color: var(--logo-teal); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; transition: 0.2s; }
         .clickable-name:hover { color: #fff; }
 
-        /* Modal / Bio Popup */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
-            width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-        }
-        .modal-content {
-            background-color: var(--bg-card); margin: 10% auto; padding: 40px;
-            border: 1px solid var(--logo-teal); width: 80%; max-width: 650px; border-radius: 8px;
-        }
-        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .close-btn:hover { color: #fff; }
+       /* Modal / Bio Popup */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    padding: 24px 0;
+}
 
-        footer { padding: 80px 8% 50px; text-align: center; background: #08090b; }
-        .footer-logo-wrap { width: 100px; margin: 0 auto 20px; opacity: 0.9; }
+.modal-content {
+    position: relative;
+    background-color: var(--bg-card);
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid var(--logo-teal);
+    width: 80%;
+    max-width: 800px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    max-height: none;
+    overflow: visible;
+}
 
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+@media (max-width: 700px) {
+    .modal {
+        padding: 12px 0;
+    }
+
+    .modal-content {
+        width: 92%;
+        padding: 24px 18px;
+    }
+}
+
+/* AI Technologies section */
+.pillars {
+    display: grid;
+    grid-template-columns: 0.9fr 1.5fr;
+    align-items: center;
+    gap: 40px;
+
+    /* 히어로 제목의 왼쪽 시작선에 맞추기 */
+    padding: 100px 3% 130px 4.5%;
+
+    background: #21370B;
+    box-sizing: border-box;
+}
+
+.pillars-description {
+    margin-left: 0;
+    padding-left: 0;
+    min-width: 0;
+}
+
+@media (max-width: 700px) {
+    .pillars {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 100px 6%;;
+    }
+}
+
+.pillars-description h2 {
+    margin: 0 0 14px;
+    color: #ffffff;
+    font-size: clamp(20px, 2vw, 30px);
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.pillars-description .highlight {
+    color: #38B6C0;
+}
+
+.pillars-grid {
+ display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pillars-grid .pillar-card {
+    min-width: 0;
+height: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid rgba(190, 205, 175, 0.6);
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(71, 118, 197, 0.12);
+}
+
+.pillars-grid .pillar-icon {
+    width: 80%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    margin-top: 20px;
+    border-radius: 50%;
+    background: transparent;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.3;
+}
+
+.pillars-grid .pillar-card h3 {
+    margin: 12px 0 10px;
+    color: #ffffff;
+    font-size: clamp(10px, 1vw, 14px);
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 600;
+}
+/* Mobile */
+@media (max-width: 700px) {
+    .pillars {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 70px 5%;
+    }
+
+    .pillars-grid {
+        gap: 8px;
+    }
+
+    .pillars-grid .pillar-card {
+        height: auto;
+        min-height: 220px;
+        padding: 7px;
+        border-radius: 16px;
+    }
+
+    .pillars-grid .pillar-icon {
+        width: 96%;
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    .pillars-grid .pillar-card h3 {
+        font-size: 10px;
+        overflow-wrap: anywhere;
+    }
+}
+
+
+
+        
+/* Creative Content and Leadership: vertical layout */
+.info-sections {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+    padding: 0 8% 80px;
+}
+
+.info-sections .info-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Creative Content Section */
+.creative-content {
+    width: 100%;
+    padding: 0 8% 120px;
+    box-sizing: border-box;
+    color: var(--text-main);
+}
+
+.creative-header {
+    text-align: center;
+    padding: 20px 0 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.creative-header h2 {
+    font-size: 30px;
+    line-height: 1.4;
+    margin-bottom: 2px;
+}
+
+.creative-header p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.creative-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    padding: 20px 0 0;
+}
+
+.creative-card {
+    min-width: 0;
+    min-height: 150px;
+    padding: 15px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    background: rgba(71, 118, 197, 0.12);
+    transition: 0.3s;
+}
+
+.creative-card:hover {
+    border-color: var(--logo-teal);
+    background: rgba(57, 181, 188, 0.08);
+}
+
+.creative-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+    .creative-content {
+        padding: 0 5% 30px;
+    }
+
+    .creative-header h2 {
+            font-size: 30px !important;
+    line-height: 1.4;
+    margin-bottom: 2px;
+    }
+
+    .creative-header p {
+        font-size: 14px;
+    }
+
+    .creative-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .creative-card {
+        min-height: 110px;
+    }
+
+    .creative-card h3 {
+        font-size: 13px;
+    }
+}
+
+        margin-bottom: 18px;
+}
+
+.leadership-card p {
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+    .leadership-section {
+        padding: 0 5% 50px;
+    }
+
+    .leadership-card {
+        padding: 25px;
+    }
+
+
+}
+
+/* Leadership Section */
+.leadership-section {
+    width: 100%;
+    padding: 0 8% 80px;
+    box-sizing: border-box;
+}
+
+.leadership-header {
+    text-align: center;
+    padding: 20px 0 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.leadership-header h2 {
+    font-size: 30px;
+    line-height: 1.4;
+    margin-bottom: 2px;
+}
+
+.leadership-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 25px;
+}
+
+.leadership-card {
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    padding: 45px;
+    border-radius: 4px;
+}
+
+.leadership-card p {
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+    .leadership-section {
+        padding: 0 5% 50px;
+    }
+
+    .leadership-card {
+        padding: 25px;
+    }
+
+    .leadership-header h2 {
+        font-size: 30px;
+        line-height: 1.4;
+        margin-bottom: 2px;
+    }
+}
+        
+        /* Center align Leadership content */
+.leadership-header {
+    text-align: center;
+}
+
+.leadership-card {
+    text-align: center;
+}
+
+.leadership-label {
+    text-align: center;
+}
+
+/* Sponsorships Section */
+.sponsorships-section {
+    width: 100%;
+    padding: 0 8% 80px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.sponsorships-header {
+    text-align: center;
+    padding: 20px 0 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.sponsorships-header h2 {
+    font-size: 30px;
+    line-height: 1.4;
+    margin-bottom: 2px;
+}
+
+.sponsorships-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.sponsorship-link {
+    display: inline-block;
+    max-width: 800px;
+    color: var(--text-dim);
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: center;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.sponsorship-link:hover {
+    color: var(--logo-teal);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+@media (max-width: 700px) {
+    .sponsorships-section {
+        padding: 0 5% 50px;
+    }
+
+    .sponsorships-header h2 {
+        font-size: 30px;
+    }
+
+    .sponsorship-link {
+        font-size: 16px;
+    }
+}
+
+
+        /* CONTACT US button fix */
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 220px;
+    min-height: 62px;
+    padding: 18px 28px;
+    box-sizing: border-box;
+    background: #39b5bc;
+    color: #10220b;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+.cta-btn:hover {
+    background: #55cbd0;
+    color: #10220b;
+    text-decoration: none;
+}
+
+
+/* Soft glow for CONTACT US button */
+.cta-btn {
+    box-shadow:
+        0 0 10px rgba(57, 181, 188, 0.25),
+        0 0 22px rgba(57, 181, 188, 0.15);
+    animation: contactGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes contactGlow {
+    from {
+        box-shadow:
+            0 0 8px rgba(57, 181, 188, 0.2),
+            0 0 16px rgba(57, 181, 188, 0.1);
+    }
+    to {
+        box-shadow:
+            0 0 14px rgba(57, 181, 188, 0.45),
+            0 0 28px rgba(57, 181, 188, 0.25);
+    }
+}
+
+
+/* Flip card fix */
+.pillars-grid .pillar-card.flip-card {
+    position: relative;
+    display: block;
+    height: 300px;
+    min-height: 0;
+    padding: 0;
+    perspective: 1000px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    overflow: visible;
+}
+
+.pillars-grid .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.pillars-grid .flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+.pillars-grid .flip-card-front,
+.pillars-grid .flip-card-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid rgba(190, 205, 175, 0.6);
+    background: rgba(71, 118, 197, 0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.pillars-grid .flip-card-front {
+    transform: rotateY(0deg);
+}
+
+.pillars-grid .flip-card-back {
+    transform: rotateY(180deg);
+    border-top: 2px solid var(--logo-teal);
+}
+
+.pillars-grid .flip-card-front .pillar-icon {
+    width: 80%;
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+.pillars-grid .flip-card-front h3 {
+    margin: 12px 0 10px;
+}
+
+.pillars-grid .flip-card-back p {
+    margin: 0;
+    padding: 12px;
+    color: var(--text-main);
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+    .pillars-grid .pillar-card.flip-card {
+        height: 220px;
+        min-height: 0;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .pillars-grid .flip-card-front,
+    .pillars-grid .flip-card-back {
+        padding: 7px;
+        border-radius: 0;
+    }
+
+    .pillars-grid .flip-card-front .pillar-icon {
+        width: 96%;
+        margin-top: 0;
+    }
+
+    .pillars-grid .flip-card-front h3 {
+        font-size: 10px;
+    }
+
+    .pillars-grid .flip-card-back p {
+        font-size: 12px;
+    }
+}
+
+   .pillar-title {
+    letter-spacing: 0.04em;
+}     
+
+
+/* Footer logo and copyright alignment */
+footer .footer-logo-wrap {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 4px;
+}
+
+footer .footer-logo-wrap .feathered-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+footer > p {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+        
+        
     </style>
 </head>
 <body>
 
+
+    
     <canvas id="bg-canvas"></canvas>
 
     <nav>
@@ -129,75 +879,344 @@
             <a href="index.html"><img src="logo.png" alt="Qtairo"></a>
         </div>
         <div class="nav-links mono">
-           <a href="#research">RESEARCH</a>
+           <a href="#research">AI TECHNOLOGIES</a>
+
+
            <a href="javascript:void(0)" class="clickable-name" onclick="showBio('connect.html')">CONNECT</a>
           
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <div class="mono" style="color: var(--logo-teal); margin-bottom: 20px;">R&D INFRASTRUCTURE</div>
-            <h1 style="font-size: 4.2rem; line-height: 1; margin-bottom: 20px;">
-                Quantum-Led <br><span class="highlight">Intelligence.</span>
-            </h1>
-            <p style="font-size: 20px; color: var(--text-dim); max-width: 500px; margin-bottom: 45px; font-weight: 300;">
-                Building the computational foundation for autonomous kinetic systems and neural research.
-            </p>
-            <a href="javascript:void(0)" class="cta-btn mono" onclick="showBio('connect.html')" id="research">Initiate Project</a>
+<section class="hero">
+    <div class="hero-content">
+        <div class="mono" style="color: var(--logo-teal); margin-bottom: 20px;">
+            AI TECHNOLOGY
+        </div>
+
+<h1 style="font-size: clamp(32px, 8vw, 58px); line-height: 1.05; margin-bottom: 20px; overflow-wrap: anywhere;">
+            Intelligence, <br>
+            <span class="highlight">Built for Reality</span>
+        </h1>
+
+        <p style="font-size: 20px; color: var(--text-dim); max-width: 500px; margin-bottom: 45px; font-weight: 300;">
+            We develop AI technologies that transform data, vision, and creativity into practical solutions.
+        </p>
+
+        <a href="javascript:void(0)"
+           class="cta-btn mono"
+           onclick="showBio('connect.html')"
+           id="research">
+            CONTACT US
+        </a>
+    </div>
+
+    <div class="hero-image">
+        <div class="hero-logo-ring"></div>
+
+        <img
+            src="logo.png"
+            alt="Qtairo Inc. Logo"
+            class="hero-logo-container"
+        >
+    </div>
+</section>
 
             
+<!-- AI Technologies Section -->
+<section class="pillars" id="ai-technologies">
+    <div class="pillars-description">
+        <h2>Developing</h2>
+        <h2 class="highlight">AI technologies</h2>
+        <h2>for sensing, data,</h2>
+        <h2>and content generation.</h2>
+    </div>
+
+    <div class="pillars-grid">
+
+        <!-- STRUCTURED LIGHT -->
+      
+<div class="pillar-card flip-card" tabindex="0" role="button" aria-label="Structured Light 설명 보기">
+    <div class="flip-card-inner">
+
+        <div class="flip-card-front">
+            <div class="pillar-icon">
+                <svg viewBox="0 0 100 100" class="led-icon"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Structured Light">
+                    <defs>
+                        <filter id="glow-structured">
+                            <feGaussianBlur stdDeviation="1.8" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g fill="none" stroke="#bdfaff"
+                       stroke-linecap="round" stroke-linejoin="round"
+                       filter="url(#glow-structured)">
+                        <circle cx="50" cy="50" r="28"
+                                stroke-width="0.7" opacity="0.4"/>
+                        <circle cx="50" cy="50" r="19"
+                                stroke-width="0.6" opacity="0.3"/>
+                        <path d="M50 12 V43" stroke-width="1.8"/>
+                        <path d="M50 43 L39 32 M50 43 L61 32"
+                              stroke-width="1.8"/>
+                        <path d="M50 43 V83" stroke-width="1.8"/>
+                        <path d="M39 55 L50 43 L61 55"
+                              stroke-width="1.8"/>
+                        <path d="M25 43 H75"
+                              stroke-width="1.2" opacity="0.9"/>
+                        <circle cx="50" cy="43" r="2.5"
+                                fill="#ffffff" stroke="none"/>
+                    </g>
+                </svg>
+            </div>
+            <h3 class="pillar-title">STRUCTURED<br>LIGHT</h3>
         </div>
-        <div class="hero-image">
-            <div class="hero-logo-container">
-                <img src="logo.png" alt="Qtairo Inc" class="feathered-logo">
+
+        <div class="flip-card-back">
+            <p>3D sensing technology for accurate shape and depth measurement.</p>
+        </div>
+
+    </div>
+</div>
+
+
+        <!-- DATA AUGMENTATION -->
+       
+<div class="pillar-card flip-card" tabindex="0" role="button" aria-label="Data Augmentation 설명 보기">
+    <div class="flip-card-inner">
+
+        <div class="flip-card-front">
+            <div class="pillar-icon">
+                <svg viewBox="0 0 100 100" class="led-icon"
+                     xmlns="http://www.w3.org/2000/svg"
+                     aria-label="Data Augmentation">
+                    <defs>
+                        <filter id="glow-data">
+                            <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g fill="none" stroke="#bdfaff"
+                       stroke-linejoin="round"
+                       filter="url(#glow-data)">
+                        <path d="M50 24 L82 40 L50 56 L18 40 Z"
+                              stroke-width="1.3"/>
+                        <path d="M18 50 L50 66 L82 50"
+                              stroke-width="1.2" opacity="0.85"/>
+                        <path d="M18 60 L50 76 L82 60"
+                              stroke-width="1.2" opacity="0.7"/>
+                        <path d="M30 19 V75 M40 14 V80 M50 10 V84 M60 14 V80 M70 19 V75"
+                              stroke-width="0.9"
+                              stroke-dasharray="1 4" opacity="0.85"/>
+                        <circle cx="50" cy="10" r="1.5"
+                                fill="#ffffff" stroke="none"/>
+                        <circle cx="50" cy="84" r="1.5"
+                                fill="#ffffff" stroke="none"/>
+                    </g>
+                </svg>
+            </div>
+            <h3 class="pillar-title">DATA<br>AUGMENTATION</h3>
+        </div>
+
+        <div class="flip-card-back">
+            <p>AI-generated data to enhance model training and performance.</p>
+        </div>
+
+    </div>
+</div>
+
+
+        <!-- VIDEO GENERATION -->
+        
+<div class="pillar-card flip-card" tabindex="0" role="button" aria-label="Video Generation 설명 보기">
+    <div class="flip-card-inner">
+
+        <div class="flip-card-front">
+            <div class="pillar-icon">
+                <!-- Video Generation 아이콘 -->
+             
+<svg viewBox="0 0 100 100" class="led-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-label="Video Generation">
+    <defs>
+        <filter id="glow-video">
+            <feGaussianBlur stdDeviation="1.8" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <g fill="none" stroke="#bdfaff"
+       stroke-linejoin="round" stroke-linecap="round"
+       filter="url(#glow-video)">
+
+        <!-- 타원형 궤도 -->
+        <ellipse cx="50" cy="50" rx="39" ry="19"
+                 stroke-width="0.8" opacity="0.75"
+                 transform="rotate(-18 50 50)"/>
+
+        <!-- 영상 화면 -->
+        <rect x="23" y="29" width="54" height="42"
+              rx="3" stroke-width="1.5"/>
+
+        <!-- 재생 버튼 -->
+        <path d="M44 39 L44 61 L62 50 Z"
+              stroke-width="1.5"
+              fill="#bdfaff" fill-opacity="0.2"/>
+
+        <!-- 궤도 위의 빛 입자 -->
+        <circle cx="14" cy="54" r="1.5" fill="#bdfaff" stroke="none"/>
+        <circle cx="79" cy="34" r="1.2" fill="#bdfaff" stroke="none"/>
+        <circle cx="68" cy="72" r="1" fill="#bdfaff" stroke="none"/>
+    </g>
+</svg>
+
+            </div>
+            <h3 class="pillar-title">VIDEO<br>GENERATION</h3>
+        </div>
+
+        <div class="flip-card-back">
+            <p>AI-powered video generation for creative and practical applications.</p>
+        </div>
+
+    </div>
+</div>
+
+
+    </div>
+</section>
+
+
+<!-- Creative Content Section -->
+<section class="creative-content" id="creative-content">
+    <div class="creative-header">
+        <h2>Creative Content</h2>
+        <p>Creating original stories, visuals, and digital content across multiple platforms.</p>
+    </div>
+
+
+<div class="creative-grid">
+
+    <!-- PUBLISHING -->
+    <div class="creative-card flip-card" tabindex="0" role="button">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h3>PUBLISHING</h3>
+            </div>
+            <div class="flip-card-back">
+                <p>AI-assisted book creation and publishing</p>
             </div>
         </div>
-        <p id="research"></p>
-    </section>
-    
-    <section class="pillars">
-        <div class="pillar-card">
-            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Division 01</div>
-            <h3 class="mono">QUANTUM</h3>
-            <p style="color: var(--text-dim);">Solving noise-to-logic ratios for industrial-grade quantum advantage.</p>
+    </div>
+
+    <!-- YOUTUBE -->
+    <div class="creative-card flip-card" tabindex="0" role="button">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h3>YOUTUBE</h3>
+            </div>
+            <div class="flip-card-back">
+                <p>AI-powered production of classic literature Shorts and story-based cartoons</p>
+            </div>
         </div>
-        <div class="pillar-card">
-            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Division 02</div>
-            <h3 class="mono">AI</h3>
-            <p style="color: var(--text-dim);">Proprietary neural architectures designed for high-frequency kinetic feedback.</p>
+    </div>
+
+    <!-- ILLUSTRATION -->
+    <div class="creative-card flip-card" tabindex="0" role="button">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h3>ARTWORK</h3>
+            </div>
+            <div class="flip-card-back">
+                <p>Creation and sale of original artworks and illustrations</p>
+            </div>
         </div>
-        <div class="pillar-card">
-            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Division 03</div>
-            <h3 class="mono">ROBOTICS</h3>
-            <p style="color: var(--text-dim);">Physical agents capable of autonomous decision making in unmapped environments.</p>
+    </div>
+
+    <!-- EMOTICONS -->
+    <div class="creative-card flip-card" tabindex="0" role="button">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h3>EMOTICONS</h3>
+            </div>
+            <div class="flip-card-back">
+                <p>Character development for digital emoticons and content</p>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <!-- SOCIAL CONTENT -->
+    <div class="creative-card flip-card" tabindex="0" role="button">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <h3>SOCIAL CONTENT</h3>
+            </div>
+            <div class="flip-card-back">
+                <p>Story-based content inspired by real-life experiences</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    </div>
+</section>
+            
+<!-- Leadership Section -->
+<section class="leadership-section" id="leadership">
+    <div class="leadership-header">
+        <h2>Leadership</h2>
+    </div>
+
+    <div class="leadership-grid">
+        <div class="leadership-card">
+            <p>
+                <span class="clickable-name" onclick="showBio('cje.html')">Changsoo Je, PhD</span>
+                / Chief Executive Officer
+            </p>
+            <p>
+                <span class="clickable-name" onclick="showBio('wjj.html')">Woojeong Jeon</span>
+                / Director
+            </p>
+        </div>
+    </div>
+</section>
 
 
-    
-    <section class="info-sections">
-        <div class="info-card">
-            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Milestones</div>
-            <h3 class="mono">History</h3>
-            <ul class="info-list">
-                <li><span>Established:</span> Dec 19, 2025</li>
-                <li><span>Operations Commenced:</span> Jan 06, 2026</li>
-            </ul>
-        </div>
-        <div class="info-card">
-            <div class="mono" style="color: var(--logo-teal); margin-bottom: 12px;">Leadership</div>
-            <h3 class="mono">People</h3>
-            <ul class="info-list">
-                <li><span class="clickable-name" onclick="showBio('cje.html')">Changsoo Je, PhD</span> / Chief Executive Officer</li>
-                <li><span class="clickable-name" onclick="showBio('wjj.html')">Woojeong Jeon</span> / Director</li>
-            </ul>
-        </div>
-    </section>
+
+<!-- Sponsorships Section -->
+<section class="sponsorships-section" id="sponsorships">
+    <div class="sponsorships-header">
+        <h2>Sponsorships</h2>
+    </div>
+
+    <div class="sponsorships-content">
+        <a
+            href="https://www.aiesc.tech/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="sponsorship-link"
+        >
+            The International Conference on Artificial Intelligence in Education and Smart Campus<br>      
+            (AIESC 2027)
+        </a>
+    </div>
+</section>
+
+            
 
     <div id="bioModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
+        
             <div id="bioContainer">
                 </div>
         </div>
@@ -211,7 +1230,7 @@
 
     <footer>
 
-        <div style="text-align: left;">
+       <div style="text-align: left; padding: 0 8%; box-sizing: border-box;">
             
             <ul class="info-list" style="line-height: 1.2;">
             <li>
@@ -247,6 +1266,104 @@
         margin: 40px 0;
         width: 100%;
     }
+
+
+@media (max-width: 700px) {
+  .hero-image {
+    display: none !important;
+  }
+}
+
+            @media (max-width: 700px) {
+    .nav-links {
+        justify-content: flex-end;
+        text-align: right;
+    }
+}
+
+      
+/* Creative Content flip fix */
+.creative-grid .creative-card.flip-card {
+    display: block !important;
+    position: relative;
+    height: 150px;
+    min-height: 0;
+    padding: 0;
+    perspective: 1000px;
+    background: transparent;
+    overflow: visible;
+}
+
+.creative-grid .creative-card .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.creative-grid .creative-card.flip-card.is-flipped .flip-card-inner {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+.creative-grid .creative-card .flip-card-front,
+.creative-grid .creative-card .flip-card-back {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(71, 118, 197, 0.12);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.creative-grid .creative-card .flip-card-front {
+    transform: rotateY(0deg);
+}
+
+.creative-grid .creative-card .flip-card-back {
+    transform: rotateY(180deg);
+    border-color: var(--logo-teal);
+}
+
+.creative-grid .creative-card .flip-card-front h3 {
+    margin: 0;
+}
+
+.creative-grid .creative-card .flip-card-back p {
+    margin: 0;
+    color: var(--text-main);
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+    .creative-grid .creative-card.flip-card {
+        height: 110px;
+    }
+
+    .creative-grid .creative-card .flip-card-front,
+    .creative-grid .creative-card .flip-card-back {
+        padding: 8px 6px;
+    }
+
+    .creative-grid .creative-card .flip-card-back p {
+        font-size: 12px;
+    }
+}
+            
 </style>
 
 <div class="info">
@@ -260,7 +1377,7 @@
         <div class="footer-logo-wrap" style="margin-bottom: 4px;">
         <img src="logo.png" alt="Qtairo" class="feathered-logo" style="display: block;">
         </div>
-        <p style="color: var(--text-dim); margin-top: 0; font-size: inherit;">&copy;&nbsp;&nbsp;2025&ndash;2026&nbsp;&nbsp;&nbsp;Qtairo Inc.</p>
+        <p style="color: var(--text-dim); margin-top: 0; font-size: inherit;">&copy;&nbsp;&nbsp;2025&ndash;2027&nbsp;&nbsp;&nbsp;Qtairo Inc.</p>
         
     </footer>
 
@@ -280,9 +1397,58 @@
             }
         }
 
+
         function closeModal() {
             document.getElementById('bioModal').style.display = "none";
         }
+
+        async function showResearchProfile() {
+            const container = document.getElementById('bioContainer');
+
+            try {
+                const response = await fetch('research-profile.html');
+                if (!response.ok) {
+                    throw new Error('Research profile not found');
+                }
+
+                const html = await response.text();
+                container.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading research profile:', error);
+                container.innerHTML = '<p>Research profile unavailable.</p>';
+            }
+        }
+
+
+        async function showPublications() {
+    const container = document.getElementById('bioContainer');
+
+    try {
+        const response = await fetch('publications.html');
+
+        if (!response.ok) {
+            throw new Error('Publications page not found');
+        }
+
+        const html = await response.text();
+        container.innerHTML = html;
+
+    } catch (error) {
+        console.error('Error loading publications:', error);
+        container.innerHTML =
+            '<p>Publications could not be loaded.</p>';
+    }
+}
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('bioModal')) {
+                closeModal();
+            }
+        }
+
+
+
+        
 
         window.onclick = function(event) {
             if (event.target == document.getElementById('bioModal')) {
@@ -317,6 +1483,25 @@
         window.addEventListener('resize', init);
         init(); animate();
     </script>
+
+
+<script>
+document.querySelectorAll('.flip-card').forEach(card => {
+    function flipCard() {
+        card.classList.toggle('is-flipped');
+    }
+
+    card.addEventListener('click', flipCard);
+
+    card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            flipCard();
+        }
+    });
+});
+</script>
+    
 </body>
 
 </html>
